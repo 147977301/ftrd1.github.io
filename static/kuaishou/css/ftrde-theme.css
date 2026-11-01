@@ -1,0 +1,26 @@
+/* Reuse the confirmed FTRDE palette and logo; retain the Sanpinche page structure. */
+:root{--theme-color:#FF6A00;--theme-dark:#DB4A00;--theme-light:#FFF4E7;--theme-glow:rgba(255,106,0,.18)}
+body .header{background:#fff;border-bottom:2px solid var(--theme-color)}
+body .logo-area{gap:0;flex-shrink:0}
+body .ftrde-brand-logo{display:block;width:230px;height:auto;object-fit:contain}
+body .header-icon,body .desktop-nav-item{color:#334155}
+body .desktop-nav-item:hover{background:var(--theme-light);color:var(--theme-dark)}
+body .desktop-nav-item.active{background:var(--theme-color);color:#fff}
+body .hero-section{background:linear-gradient(115deg,#ff7d14,#f65c00 64%,#d94600)}
+body .hero-title{background:none;-webkit-text-fill-color:#fff;color:#fff}
+body .hero-desc{color:#fff}
+body .bottom-nav{background:#fff;border-top-color:#ffe0bd;box-shadow:0 -2px 10px rgba(90,40,0,.06)}
+body .bottom-nav-item{color:#64748b}
+body .bottom-nav-item.active{color:var(--theme-dark);background:var(--theme-light)}
+body .footer-seo{background:linear-gradient(115deg,#ff7d14,#f65c00 64%,#d94600);color:#fff}
+body .footer-seo-links a,body .footer-copyright,body .footer-copyright a{color:#fff}
+body .footer-seo-links a:hover,body .footer-copyright a:hover{color:#fff;text-decoration:underline}
+body .buy-link,body .buy-now-btn,body .btn-buy,body .search-btn,body .submit-btn{color:#fff}
+body .category-link:hover{background:var(--theme-light);color:var(--theme-dark)}
+body .category-link.active{background:var(--theme-color);color:#fff}
+@media(max-width:768px){.ftrde-brand-logo{width:210px;max-width:calc(100vw - 110px)}}
+
+body .buy-link,body .buy-now-btn,body .btn-buy,body .search-btn,body .submit-btn{background:var(--theme-color);color:#fff}
+body .buy-link:hover,body .buy-now-btn:hover,body .btn-buy:hover,body .search-btn:hover,body .submit-btn:hover{background:var(--theme-dark);color:#fff}
+
+body .desktop-nav-item{white-space:nowrap}@media(min-width:769px) and (max-width:1100px){body .desktop-nav{gap:2px}body .desktop-nav-item{font-size:13px;padding:8px 9px}body .ftrde-brand-logo{width:185px}}
