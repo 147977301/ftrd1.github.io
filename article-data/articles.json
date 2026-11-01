@@ -1,5 +1,27 @@
 [
   {
+    "id": 52,
+    "title": "原手机号收不到验证码，快手换绑前先核对这几件事",
+    "description": "原手机号收不到短信时，先分清号码状态、官方验证与交付资料的条件，了解换绑前应该询问什么，以及遇到异常提示怎样保留必要记录。",
+    "category": "选购与交付",
+    "bodyFile": "articles/52.md",
+    "publishedDate": null,
+    "modifiedDate": null,
+    "sources": [
+      {
+        "title": "如何换绑手机号？",
+        "url": "https://www.kuaishou.com/help/feedback/2651?categoryId=2635&subCategoryId=2640",
+        "publisher": "快手帮助中心"
+      },
+      {
+        "title": "为什么提示我帐号异常，需重新登录/验证？",
+        "url": "https://www.kuaishou.com/help/feedback/2660?categoryId=hot",
+        "publisher": "快手帮助中心"
+      }
+    ],
+    "writingMethod": "Codex本地任务"
+  },
+  {
     "id": 51,
     "title": "快手批发网24h自助发卡",
     "description": "按用途选择快手账号，分清全天选购、付款确认与资料交付，了解普通账号格式、CK协议号区别以及验收和售后要点。",

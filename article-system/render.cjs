@@ -118,7 +118,12 @@ module.exports = function buildArticles(source, output, options = {}) {
 
   for (const [index, article] of records.entries()) {
     const url = articlePath(article);
-    const body = renderBody(article);
+    const referenceHtml = !article.sources?.length ? '' : '<section class="article-related article-sources"><h2>参考资料</h2>' + article.sources.map(source => {
+      const link = new URL(source.url);
+      if (link.protocol !== 'https:' || link.hostname !== 'www.kuaishou.com' || !/^\/help\/feedback\/\d+$/.test(link.pathname)) throw new Error('Unexpected reference link');
+      return '<p><a href="' + escape(link.href) + '" target="_blank" rel="noopener noreferrer">' + escape(source.title) + '</a> · 快手帮助中心</p>';
+    }).join('') + '</section>';
+    const body = renderBody(article) + referenceHtml;
     const date = article.modifiedDate;
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || date < article.publishedDate) throw new Error('Invalid article date');
     const schema = { '@context': 'https://schema.org', '@type': 'Article', headline: article.title, description: article.description,
