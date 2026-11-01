@@ -1,0 +1,6 @@
+﻿const fs=require('fs'),p=require('path');
+module.exports=function(root){
+ const urls=[];
+ function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){const f=p.join(dir,e.name);if(e.isDirectory()){walk(f);continue;}if(!e.name.endsWith('.html'))continue;const relative=p.relative(root,f).replace(/\\/g,'/');if(['order/index.html','work/index.html'].includes(relative))continue;const text=fs.readFileSync(f,'utf8');if(/<meta[^>]*name="robots"[^>]*content="[^"]*noindex/i.test(text))continue;const canonical=text.match(/<link[^>]*rel="canonical"[^>]*href="([^"]+)"/i)?.[1];if(!canonical)throw Error('Missing canonical '+relative);const url=new URL(canonical);if(url.origin!=='https://ftrde.com')throw Error('Wrong sitemap domain');urls.push(url.href);}}
+ walk(root);if(new Set(urls).size!==urls.length)throw Error('Duplicate canonical');urls.sort((a,b)=>a==='https://ftrde.com/'?-1:b==='https://ftrde.com/'?1:a.localeCompare(b));const escape=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+urls.map(url=>'  <url><loc>'+escape(url)+'</loc></url>').join('\n')+'\n</urlset>\n';
+};

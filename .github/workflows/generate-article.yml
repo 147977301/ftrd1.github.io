@@ -1,0 +1,42 @@
+name: "AI文章：生成草稿"
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: "填写具体选题（6—180字），每次只生成一篇"
+        required: true
+        type: string
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: ai-article-generation
+  cancel-in-progress: false
+jobs:
+  draft:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: 生成并保存审核草稿
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+          GH_TOKEN: ${{ github.token }}
+          ARTICLE_TOPIC: ${{ inputs.topic }}
+        run: node article-system/generate.cjs
+      - name: 保留本次草稿备份
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: generated-article-draft
+          path: ${{ runner.temp }}/ftrde-generated-draft.json
+          if-no-files-found: ignore
+          retention-days: 7

@@ -1,0 +1,8 @@
+{
+  "domain": "https://ftrde.com",
+  "brand": "飞拓星联",
+  "model": "gpt-6.1-sol",
+  "minCharacters": 800,
+  "maxCharacters": 2400,
+  "maxOutputTokens": 8000
+}
